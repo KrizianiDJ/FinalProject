@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.krizianidj.capstone1.MainMenu">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@mipmap/applogo"
+            tools:layout_editor_absoluteX="104dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <Button
+            android:id="@+id/tempButton"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_alignLeft="@+id/listButton"
+            android:layout_alignStart="@+id/listButton"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginTop="39dp"
+            android:text="Temp/Humidity Values"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="129dp" />
+
+        <Button
+            android:id="@+id/camButton"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_alignLeft="@+id/listButton"
+            android:layout_alignStart="@+id/listButton"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginTop="39dp"
+            android:text="Camera"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="129dp" />
+
+        <Button
+            android:id="@+id/listButton"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:layout_alignLeft="@+id/listButton"
+            android:layout_alignStart="@+id/listButton"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginTop="39dp"
+            android:text="Lists"
+            tools:layout_editor_absoluteX="53dp"
+            tools:layout_editor_absoluteY="129dp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
