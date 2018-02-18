@@ -12,13 +12,13 @@ import com.github.nkzawa.socketio.client.Socket;
 import java.net.URISyntaxException;
 
 public class MainMenu extends AppCompatActivity {
-   private Socket socket;
+   /*private Socket socket;
     {
         try{
            socket= IO.socket("http://192.168.0.15:4000");
        }
        catch(URISyntaxException e){}
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
