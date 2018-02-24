@@ -1,15 +1,18 @@
 package com.example.krizianidj.capstone1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -24,32 +27,18 @@ import java.net.URISyntaxException;
 public class Camera extends AppCompatActivity {
 
 
+
+
     private Socket socket;
 
     /**************** code for camera fee*****************/
     ImageView imageView;
-    String url="http://192.168.0.19:3000/";
+    String url="http://192.168.0.15:3000/";
     //uni
     //String url="http://10.76.1.43:3000/";
      /*end code for camera fee*/
 
-    private Emitter.Listener onNewMessage=new Emitter.Listener(){
-        @Override
-        public void call (final Object... args)
-        {
-            runOnUiThread(new Runnable(){
-                @Override
-                public void run()
-                {
-                    String data= (String) args[0];
-                    //TextView txt=(TextView) findViewById(R.id.textView);
-                    //txt.setText(data);
 
-
-                }
-            });
-        }
-    };
     {
         try{
             //server url
@@ -117,7 +106,7 @@ public class Camera extends AppCompatActivity {
         LeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                socket.emit("GoUp","Android says move camera left");
+                socket.emit("GoLeft","Android says move camera left");
 
             }});
 
@@ -126,7 +115,7 @@ public class Camera extends AppCompatActivity {
         RightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                socket.emit("GoUp","Android says move camera right");
+                socket.emit("GoRight","Android says move camera right");
 
             }});
 
@@ -135,14 +124,63 @@ public class Camera extends AppCompatActivity {
         DownButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                socket.emit("GoUp","Android says move camera down");
+                socket.emit("GoDown","Android says move camera down");
 
             }});
+
+        socket.on("limitUpR", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Up limit reached.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        socket.on("limitDownR", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Down limit reached.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        socket.on("limitLeftR", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Left limit reached.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        socket.on("limitRightR", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Right limit reached.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        //socket.on("LimUp",limup());
 
 
 
     }
+    private void limup(){
 
+    }
     private void loadImageFromURL(String url)
     {
         /*Picasso.with(this).load(url).fit().centerCrop()
