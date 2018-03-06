@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "837273930730",
+    "firebase_url": "https://fridgebuddy-auth.firebaseio.com",
+    "project_id": "fridgebuddy-auth",
+    "storage_bucket": "fridgebuddy-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837273930730:android:9ee9e17a215f4bd8",
+        "android_client_info": {
+          "package_name": "com.example.krizianidj.capstone1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837273930730-o7r7kcccsi5snr6kes9pjlufs471vpb6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.krizianidj.capstone1",
+            "certificate_hash": "83407ead8ecba5f0fcdebd4593835d717a5f5f24"
+          }
+        },
+        {
+          "client_id": "837273930730-1euoki6u6scppie0gbqd5eknbvpesgrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB39u70W9aWHjTuntMv4aulnbO-1d1qMYY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837273930730-1euoki6u6scppie0gbqd5eknbvpesgrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
