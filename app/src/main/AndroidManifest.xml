@@ -11,19 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Registration">
-
-        </activity>
+        <activity android:name=".Registration"></activity>
         <activity android:name=".Camera" />
         <activity android:name=".SignIn" />
-        <activity android:name=".MainMenu" >
+        <activity android:name=".MainMenu">
             <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration2"></activity>
+        <activity android:name=".Registration2" />
+        <activity android:name=".Testing"></activity>
     </application>
 
 </manifest>

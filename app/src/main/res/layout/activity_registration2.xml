@@ -41,32 +41,24 @@
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/editTextFullName"
+                android:id="@+id/editTextDeviceName"
                 android:layout_margin="15dp"
                 android:inputType="text"
-                android:hint="Full Name"
+                android:hint="Enter a name for the device"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/editTextDisplayName"
+                android:id="@+id/editTextAddressPi"
                 android:layout_margin="15dp"
                 android:inputType="text"
-                android:hint="Display Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/editTextPhone"
-                android:layout_margin="15dp"
-                android:inputType="phone"
-                android:hint="Phone Number"
+                android:hint="Enter the address for the device"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/buttonSave"
-                android:text="Save Changes"
+                android:text="Register Device"
                 android:layout_margin="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

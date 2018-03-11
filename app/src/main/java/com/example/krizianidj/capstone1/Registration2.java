@@ -1,72 +1,104 @@
 package com.example.krizianidj.capstone1;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Patterns;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
+
+        import android.content.Intent;
+        import android.support.annotation.NonNull;
+        import android.support.v7.app.AppCompatActivity;
+        import android.os.Bundle;
+        import android.text.TextUtils;
+        import android.util.Patterns;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ProgressBar;
+        import android.widget.TextView;
+        import android.widget.Toast;
+
+        import com.github.nkzawa.socketio.client.IO;
+        import com.github.nkzawa.socketio.client.Socket;
+        import com.github.nkzawa.socketio.client.SocketIOException;
+        import com.google.android.gms.tasks.OnCompleteListener;
+        import com.google.android.gms.tasks.Task;
+        import com.google.firebase.auth.AuthResult;
+        import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+        import com.google.firebase.auth.FirebaseUser;
+
+        import java.io.IOException;
+        import java.net.SocketException;
+        import java.net.URISyntaxException;
 
 public class Registration2 extends AppCompatActivity {
-
-    private EditText editTextFullName, editTextDisplayName, editTextPhone;
-    private Button btnSave;
-    private ProgressBar progressBar;
+    Socket socket;
+    EditText RaspAdd, DeviceName;
+    Button Register;
+    ProgressBar progressBar;
+    private FirebaseAuth mAuth;
+    private Server server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration2);
 
-        editTextFullName=(EditText) findViewById(R.id.editTextFullName);
-        editTextDisplayName=(EditText) findViewById(R.id.editTextDisplayName);
-        editTextPhone=(EditText) findViewById(R.id.editTextPhone);
-        btnSave=(Button) findViewById(R.id.buttonSave);
+        RaspAdd=(EditText) findViewById(R.id.editTextAddressPi);
+        DeviceName=(EditText) findViewById(R.id.editTextDeviceName);
         progressBar=(ProgressBar) findViewById(R.id.progressbar);
+        Register=(Button) findViewById(R.id.buttonSave);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveInfo();
+                RegisterDevice();
+
+
             }
         });
 
+
     }
 
-    private void saveInfo(){
-
-        String fullname, displayname, phone;
-        fullname=editTextFullName.getText().toString().trim();
-        displayname=editTextDisplayName.getText().toString().trim();
-        phone=editTextPhone.getText().toString().trim();
-
-        if(fullname.isEmpty())
-        {
-            editTextFullName.setError("Full Name is required");
-            editTextFullName.requestFocus();
-            return;
-        }
-
-        if(phone.isEmpty())
-        {
-            editTextPhone.setError("Phone is required");
-            editTextPhone.requestFocus();
-            return;
-        }
-
-        if(!Patterns.PHONE.matcher(phone).matches())
-        {
-            editTextPhone.setError("Invalid phone format");
-            editTextPhone.requestFocus();
-            return;
-        }
-
+    void RegisterDevice() {
+        final String raspadd = RaspAdd.getText().toString().trim();
+        final String devicename = DeviceName.getText().toString().trim();
         progressBar.setVisibility(View.VISIBLE);
 
+        if (raspadd.isEmpty()) {
+            RaspAdd.setError("A raspberry Pi is required");
+            RaspAdd.requestFocus();
+            return;
+        }
+
+        if (devicename.isEmpty()) {
+            DeviceName.setError("A Device name is required");
+            DeviceName.requestFocus();
+            return;
+        }
+
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String id = mUser.getUid();
+        String monitorid = "monitor" + id;
+        try {
+            //server url
+            server=new Server();
+            socket = IO.socket(server.getAddress());
+
+        } catch (URISyntaxException e) {
+        }
+
+        socket.connect();
 
 
+        socket.emit("RegDevice", monitorid, raspadd, devicename, id);
+        progressBar.setVisibility(View.GONE);
 
+        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+        startActivity(intent);
+        finish();
     }
+
+
+
+
 }

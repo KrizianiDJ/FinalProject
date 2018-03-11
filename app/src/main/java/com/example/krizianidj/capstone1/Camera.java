@@ -17,10 +17,14 @@ import android.widget.Toast;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.json.JSONArray;
 
 import java.net.URISyntaxException;
 
@@ -28,12 +32,14 @@ public class Camera extends AppCompatActivity {
 
 
 
-
+    private Server server;
     private Socket socket;
+    private FirebaseAuth mAuth;
+    String url;
 
     /**************** code for camera fee*****************/
     ImageView imageView;
-    String url="http://192.168.0.15:3000/";
+    //String url="http://192.168.0.15:3000/";
     //uni
     //String url="http://10.76.1.43:3000/";
      /*end code for camera fee*/
@@ -42,10 +48,8 @@ public class Camera extends AppCompatActivity {
     {
         try{
             //server url
-            socket= IO.socket("http://192.168.0.13:4000");
-
-            //uni
-            //socket= IO.socket("http://10.3.72.128:4000");
+            server=new Server();
+            socket= IO.socket(server.getAddress());
 
 
         }
@@ -57,7 +61,33 @@ public class Camera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         socket.connect();
+        mAuth= FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        String id = mUser.getUid();
+        socket.emit("Getaddres",id);
+
         socket.emit("AndroidReqStart","Android says start camera");
+        socket.on("SendingAdd", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        JSONArray dataReceive =(JSONArray) args[0];
+                        try{
+                            String item = dataReceive.get(0).toString();
+                            url=item;
+                        }
+                        catch(Exception e)
+                        {
+                            Toast.makeText(getApplicationContext(),e.getMessage()
+                                    , Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+            }
+        });
 
 
         // socket.on("appResp",onNewMessage);
@@ -73,7 +103,7 @@ public class Camera extends AppCompatActivity {
                 while (!Thread.interrupted())
                     try
                     {
-                        Thread.sleep(50);
+                        Thread.sleep(5);
                         runOnUiThread(new Runnable()
                         {
 
@@ -178,30 +208,9 @@ public class Camera extends AppCompatActivity {
 
 
     }
-    private void limup(){
 
-    }
     private void loadImageFromURL(String url)
     {
-        /*Picasso.with(this).load(url).fit().centerCrop()
-                .placeholder(R.mipmap.placeholder)
-                .error(R.mipmap.ic_launcher)
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .into(imageView,new Callback(){
-
-                            @Override
-                            public void onSuccess() {
-
-                            }
-
-                            @Override
-                            public void onError() {
-
-                            }
-                        }
-
-
-                );*/
 
         Target target = new Target() {
             @Override

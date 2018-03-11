@@ -38,6 +38,7 @@ public class Registration extends AppCompatActivity{
     private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
+    private Server server;
 
 
 
@@ -171,7 +172,7 @@ public class Registration extends AppCompatActivity{
                             FirebaseUser mUser=mAuth.getCurrentUser();
                             String id=mUser.getUid();
                             Addusertodatabase(id,email,phone,firstname,lastname);
-                            Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                            Intent intent = new Intent(getApplicationContext(), Registration2.class);
                             startActivity(intent);
                             finish();
 
@@ -205,10 +206,10 @@ public class Registration extends AppCompatActivity{
 
         try{
             //server url
-            socket= IO.socket("http://192.168.0.10:4000");
+            server=new Server();
+            socket= IO.socket(server.getAddress());
 
-            //uni
-            //socket= IO.socket("http://10.3.72.128:4000");
+
 
 
         }
