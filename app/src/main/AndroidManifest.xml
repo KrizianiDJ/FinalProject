@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.krizianidj.capstone1">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Registration"></activity>
+
+        <!-- add mobile vision dependencies and version to metadata -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
+
+        <activity android:name=".Registration" />
         <activity android:name=".Camera" />
         <activity android:name=".SignIn" />
         <activity android:name=".MainMenu">
@@ -22,7 +35,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration2" />
-        <activity android:name=".Testing"></activity>
+        <activity android:name=".Testing" />
+        <activity android:name=".ScanBarcodeActivity" />
+        <activity android:name=".BarcodeActivity" />
+        <activity android:name=".CameraScan"></activity>
     </application>
 
 </manifest>

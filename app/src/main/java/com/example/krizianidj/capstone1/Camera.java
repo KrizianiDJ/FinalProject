@@ -39,10 +39,6 @@ public class Camera extends AppCompatActivity {
 
     /**************** code for camera fee*****************/
     ImageView imageView;
-    //String url="http://192.168.0.15:3000/";
-    //uni
-    //String url="http://10.76.1.43:3000/";
-     /*end code for camera fee*/
 
 
     {

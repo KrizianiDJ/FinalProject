@@ -25,6 +25,7 @@ public class MainMenu extends AppCompatActivity {
     private FirebaseUser mUser;
     private  Button camButton;
     private Button tempButton;
+    private Button listButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         camButton=(Button) findViewById(R.id.camButton);
         tempButton=(Button) findViewById(R.id.tempButton);
+        listButton=(Button) findViewById(R.id.listButton);
 
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
@@ -59,6 +61,15 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),  mUser.getUid()
                         , Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),Testing.class);
+                startActivity(i);
 
             }
         });

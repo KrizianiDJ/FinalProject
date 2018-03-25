@@ -32,8 +32,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     //for firebase auth
     compile 'com.google.firebase:firebase-auth:11.0.4'
-
+    // add mobile  vision dependencies
+    compile 'com.google.android.gms:play-services-vision:11.0.4'
 }
+
 
 
 
