@@ -35,10 +35,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration2" />
-        <activity android:name=".Testing" />
+        <activity android:name=".PiBarcodeScan" />
         <activity android:name=".ScanBarcodeActivity" />
         <activity android:name=".BarcodeActivity" />
-        <activity android:name=".CameraScan"></activity>
+        <activity android:name=".CameraScan" />
+        <activity android:name=".ListMenuActivity" />
+        <activity android:name=".AddingBarcodes"></activity>
     </application>
 
 </manifest>

@@ -68,7 +68,7 @@ public class MainMenu extends AppCompatActivity {
         listButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),Testing.class);
+                Intent i=new Intent(getApplicationContext(),ListMenuActivity.class);
                 startActivity(i);
 
             }
@@ -96,6 +96,16 @@ public class MainMenu extends AppCompatActivity {
             startActivity(new Intent(this, SignIn.class));
             finish();
         }
+        if(item.getItemId()==R.id.btnAddProduct)
+        {
+            startActivity(new Intent(this, AddingBarcodes.class));
+            finish();
+        }
         return super.onOptionsItemSelected(item);
+
+
+
     }
+
+
 }

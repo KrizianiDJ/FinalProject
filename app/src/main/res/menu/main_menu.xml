@@ -7,4 +7,10 @@
             android:icon="@mipmap/sign"
             app:showAsAction="always"/>
 
+        <item android:id="@+id/btnAddProduct"
+            android:title="Add Product"
+            app:showAsAction="never"/>
+
+
+
 </menu>

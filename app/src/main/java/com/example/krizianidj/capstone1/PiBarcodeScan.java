@@ -3,14 +3,15 @@ package com.example.krizianidj.capstone1;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseArray;
-import android.view.Surface;
-import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,23 +29,23 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.InputStream;
 import java.net.URISyntaxException;
 
-public class Testing extends AppCompatActivity {
+public class PiBarcodeScan extends AppCompatActivity {
 
     ImageView imageView;
     private Server server;
     private Socket socket;
     private FirebaseAuth mAuth;
-    TextView textView;
+    private Button doneBtn;
+    private EditText resultView;
+    //TextView textView;
     String url;
-
+    SparseArray<Barcode> barcodes, prevBarcode;
+    BarcodeTempStorage BarcodeList;
 
     {
         try{
@@ -61,15 +62,17 @@ public class Testing extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testing);
-
-        imageView=(ImageView) findViewById(R.id.camera_preview);
-        textView=(TextView)findViewById(R.id.barcode_rlt) ;
+        setContentView(R.layout.activity_pi_barcode_scanning);
+        BarcodeList=new BarcodeTempStorage();
+       imageView=(ImageView) findViewById(R.id.camera_preview);
+        //textView=(TextView)findViewById(R.id.barcode_rlt) ;
         socket.connect();
         mAuth= FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         String id = mUser.getUid();
         socket.emit("Getaddres",id);
+        doneBtn=(Button)findViewById(R.id.done_Btn);
+        resultView=(EditText) findViewById(R.id.resultView);
 
         socket.emit("AndroidReqStart","Android says start camera");
         socket.on("SendingAdd", new Emitter.Listener() {
@@ -94,8 +97,6 @@ public class Testing extends AppCompatActivity {
             }
         });
 
-
-
         new Thread(new Runnable()
         {
 
@@ -105,7 +106,7 @@ public class Testing extends AppCompatActivity {
                 while (!Thread.interrupted())
                     try
                     {
-                        Thread.sleep(5);
+                        Thread.sleep(1000);
                         runOnUiThread(new Runnable()
                         {
 
@@ -125,6 +126,15 @@ public class Testing extends AppCompatActivity {
             }
         }).start();
 
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String result=BarcodeList.resultString();
+                resultView.setText(result);
+
+            }
+        });
 
 
 
@@ -158,17 +168,23 @@ public class Testing extends AppCompatActivity {
                 }
 
                 Frame frame = new Frame.Builder().setBitmap(bitmap2).build();
-                SparseArray<Barcode> barcodes = detector.detect(frame);
+                barcodes = detector.detect(frame);
 
                 if (barcodes.size()>0) {
-                    Barcode thisCode = barcodes.valueAt(0);
-                    textView.setText(thisCode.rawValue);
 
-
+                        Barcode thisCode = barcodes.valueAt(0);
+                        //textView.setText(thisCode.rawValue);
+                        socket.emit("BarcodeDetected", thisCode.rawValue);
+                        ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 200);
+                        toneGen1.startTone(ToneGenerator.TONE_DTMF_8,100);
+                        String bar=thisCode.rawValue;
+                        BarcodeList.AddBarcode(bar);
                 }
                 else {
-                    textView.setText("no barcode detected");
+                    //textView.setText("no barcode detected");
                 }
+
+
             }
 
             @Override
@@ -183,7 +199,8 @@ public class Testing extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+
+        Intent intent = new Intent(getApplicationContext(), ListMenuActivity.class);
         startActivity(intent);
         socket.emit("AndroidReqStop","Android says stop camera");
         socket.close();
