@@ -8,6 +8,7 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -85,6 +86,7 @@ public class PiBarcodeScan extends AppCompatActivity {
                         try{
                             String item = dataReceive.get(0).toString();
                             url=item;
+
                         }
                         catch(Exception e)
                         {
@@ -96,6 +98,8 @@ public class PiBarcodeScan extends AppCompatActivity {
                 });
             }
         });
+
+
 
         new Thread(new Runnable()
         {
@@ -130,6 +134,12 @@ public class PiBarcodeScan extends AppCompatActivity {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //socket.emit("BarcodeDetected",BarcodeList.getBarcodeList());
+                mAuth=FirebaseAuth.getInstance();
+                FirebaseUser mUser = mAuth.getCurrentUser();
+                String id = mUser.getUid();
+               // BarcodeList.sendToDB(socket,id);
                 String result=BarcodeList.resultString();
                 resultView.setText(result);
 
@@ -173,12 +183,13 @@ public class PiBarcodeScan extends AppCompatActivity {
                 if (barcodes.size()>0) {
 
                         Barcode thisCode = barcodes.valueAt(0);
+                    String bar=thisCode.rawValue;
+                    BarcodeList.AddBarcode(bar);
                         //textView.setText(thisCode.rawValue);
-                        socket.emit("BarcodeDetected", thisCode.rawValue);
+                        //socket.emit("BarcodeDetected", thisCode.rawValue);
                         ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 200);
                         toneGen1.startTone(ToneGenerator.TONE_DTMF_8,100);
-                        String bar=thisCode.rawValue;
-                        BarcodeList.AddBarcode(bar);
+
                 }
                 else {
                     //textView.setText("no barcode detected");

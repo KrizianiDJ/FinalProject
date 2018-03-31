@@ -38,9 +38,10 @@
         <activity android:name=".PiBarcodeScan" />
         <activity android:name=".ScanBarcodeActivity" />
         <activity android:name=".BarcodeActivity" />
-        <activity android:name=".CameraScan" />
+        <activity android:name=".Testing" />
         <activity android:name=".ListMenuActivity" />
-        <activity android:name=".AddingBarcodes"></activity>
+        <activity android:name=".AddingBarcodes" />
+        <activity android:name=".BarcodeResultActivity"></activity>
     </application>
 
 </manifest>

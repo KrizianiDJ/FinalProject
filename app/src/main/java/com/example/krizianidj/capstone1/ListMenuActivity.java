@@ -24,7 +24,7 @@ public class ListMenuActivity extends AppCompatActivity {
         camScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),BarcodeActivity.class);
+                Intent i=new Intent(getApplicationContext(),ScanBarcodeActivity.class);
                 startActivity(i);
 
             }
@@ -42,13 +42,9 @@ public class ListMenuActivity extends AppCompatActivity {
         inFridge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                Intent i=new Intent(getApplicationContext(),Testing.class);
+                startActivity(i);
 
-
-                //for(int i=0; i<=5;i++) {
-                toneGen1.startTone(ToneGenerator.TONE_PROP_ACK);
-                //}
-                toneGen1.stopTone();
 
             }
         });

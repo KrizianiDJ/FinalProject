@@ -73,6 +73,7 @@ public class Camera extends AppCompatActivity {
                         try{
                             String item = dataReceive.get(0).toString();
                             url=item;
+
                         }
                         catch(Exception e)
                         {
