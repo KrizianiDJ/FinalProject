@@ -47,7 +47,8 @@ public class BarcodeResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_barcode_result);
         socket.connect();
         AList = (ListView) findViewById(R.id.AddedListView);
-        EList = (ListView) findViewById(R.id.ErrorListView);mAuth= FirebaseAuth.getInstance();
+        EList = (ListView) findViewById(R.id.ErrorListView);
+        mAuth= FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         String id = mUser.getUid();
 

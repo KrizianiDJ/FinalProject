@@ -41,7 +41,8 @@
         <activity android:name=".Testing" />
         <activity android:name=".ListMenuActivity" />
         <activity android:name=".AddingBarcodes" />
-        <activity android:name=".BarcodeResultActivity"></activity>
+        <activity android:name=".BarcodeResultActivity" />
+        <activity android:name=".InventoryActivity"></activity>
     </application>
 
 </manifest>

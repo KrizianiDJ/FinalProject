@@ -42,7 +42,7 @@ public class ListMenuActivity extends AppCompatActivity {
         inFridge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),Testing.class);
+                Intent i=new Intent(getApplicationContext(),InventoryActivity.class);
                 startActivity(i);
 
 
