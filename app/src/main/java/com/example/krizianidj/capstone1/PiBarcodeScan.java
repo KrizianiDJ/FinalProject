@@ -42,7 +42,7 @@ public class PiBarcodeScan extends AppCompatActivity {
     private Socket socket;
     private FirebaseAuth mAuth;
     private Button doneBtn;
-    private EditText resultView;
+    //private EditText resultView;
     //TextView textView;
     String url;
     SparseArray<Barcode> barcodes, prevBarcode;
@@ -73,7 +73,7 @@ public class PiBarcodeScan extends AppCompatActivity {
         String id = mUser.getUid();
         socket.emit("Getaddres",id);
         doneBtn=(Button)findViewById(R.id.done_Btn);
-        resultView=(EditText) findViewById(R.id.resultView);
+        //resultView=(EditText) findViewById(R.id.resultView);
 
         socket.emit("AndroidReqStart","Android says start camera");
         socket.on("SendingAdd", new Emitter.Listener() {
@@ -135,13 +135,24 @@ public class PiBarcodeScan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //socket.emit("BarcodeDetected",BarcodeList.getBarcodeList());
-                mAuth=FirebaseAuth.getInstance();
+               // String result=BarcodeList.resultString();
+                //resultView.setText(result);
+                //BarcodeList2=BarcodeList.getBarcodeList();
+
+                mAuth= FirebaseAuth.getInstance();
                 FirebaseUser mUser = mAuth.getCurrentUser();
                 String id = mUser.getUid();
-               // BarcodeList.sendToDB(socket,id);
-                String result=BarcodeList.resultString();
-                resultView.setText(result);
+                BarcodeList.sendToDB(socket,id);
+
+
+
+               // for(int i=0;i<AddedList.size();i++) {
+                //    Log.i("AddedList:",""+AddedList.get(i));
+                //}
+                socket.emit("AndroidReqStop","Android says stop camera");
+                final Intent myIntent = new Intent(getApplicationContext(), BarcodeResultActivity.class);
+                startActivity(myIntent);
+                finish();
 
             }
         });
@@ -189,6 +200,16 @@ public class PiBarcodeScan extends AppCompatActivity {
                         //socket.emit("BarcodeDetected", thisCode.rawValue);
                         ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 200);
                         toneGen1.startTone(ToneGenerator.TONE_DTMF_8,100);
+
+                    try {
+
+                        //sleep 1 seconds
+                        Thread.sleep(1000);
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                 }
                 else {

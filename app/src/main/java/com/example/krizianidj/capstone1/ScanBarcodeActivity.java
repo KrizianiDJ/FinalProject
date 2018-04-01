@@ -45,7 +45,7 @@ public class ScanBarcodeActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST_CAMERA = 2569;
     BarcodeTempStorage BarcodeList;
     private Button doneBtn;
-    private EditText resultView;
+    //private EditText resultView;
     private Server server;
     private Socket socket;
     private FirebaseAuth mAuth;
@@ -79,7 +79,7 @@ public class ScanBarcodeActivity extends AppCompatActivity {
         String id = mUser.getUid();
         socket.emit("Getaddres",id);
         doneBtn=(Button)findViewById(R.id.done_Btn);
-        resultView=(EditText) findViewById(R.id.resultView);
+        //resultView=(EditText) findViewById(R.id.resultView);
 
         //socket.emit("AndroidReqStart","Android says start camera");
         socket.on("SendingAdd", new Emitter.Listener() {
@@ -107,8 +107,8 @@ public class ScanBarcodeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String result=BarcodeList.resultString();
-                resultView.setText(result);
+                //String result=BarcodeList.resultString();
+                //resultView.setText(result);
                BarcodeList2=BarcodeList.getBarcodeList();
 
                 mAuth= FirebaseAuth.getInstance();
@@ -116,41 +116,15 @@ public class ScanBarcodeActivity extends AppCompatActivity {
                 String id = mUser.getUid();
                 BarcodeList.sendToDB(socket,id);
 
-                AddedList=BarcodeList.getAddedList();
-                ErrorList=BarcodeList.getErrorList();
+
 
                 for(int i=0;i<AddedList.size();i++) {
                     Log.i("AddedList:",""+AddedList.get(i));
                 }
                final Intent myIntent = new Intent(getApplicationContext(), BarcodeResultActivity.class);
-                //myIntent.putStringArrayListExtra("BarcodeList", BarcodeList2);
-                new Thread(new Runnable()
-                {
+                startActivity(myIntent);
+                finish();
 
-                    @Override
-                    public void run()
-                    {
-                            try
-                            {
-                                if(AddedList.isEmpty())
-                                {
-                                    AddedList.add("Empty");
-                                }
-                                if(ErrorList.isEmpty())
-                                {
-                                    ErrorList.add("Empty");
-                                }
-                                myIntent.putExtra("AddedList", AddedList);
-                                myIntent.putExtra("ErrorList", ErrorList);
-                                startActivity(myIntent);
-                                finish();
-                            }
-                            catch (Exception e)
-                            {
-                                // ooops
-                            }
-                    }
-                }).start();
 
 
             }
@@ -161,46 +135,7 @@ public class ScanBarcodeActivity extends AppCompatActivity {
 
 
 
-    private void ReadData()
-    {/*
-        for(int i=0; i<BarcodeList2.size(); i++)
-        {
-            final String barcode=BarcodeList2.get(i);
 
-            socket.emit("GetProductData",barcode,id);
-            socket.on("BarcodeRead", new Emitter.Listener() {
-                @Override
-                public void call(final Object... args) {
-
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            JSONArray dataReceive =(JSONArray) args[0];
-                            try{
-                                barcodedata = dataReceive.get(0).toString();
-
-                                if (barcodedata.matches("nodata"))
-                                {
-                                    ErrorList.add(barcode);
-                                }
-
-                                else
-                                {
-                                    AddedList.add(barcodedata);
-                                }
-                            }
-                            catch(Exception e)
-                            {
-                                System.out.print(e.getMessage());
-
-                            }
-                        }
-                    });
-                }
-            });
-
-
-        }*/
-    }
 
     private void createCameraSource() {
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this).build();

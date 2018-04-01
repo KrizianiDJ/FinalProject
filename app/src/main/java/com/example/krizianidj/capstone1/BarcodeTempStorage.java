@@ -32,12 +32,6 @@ public class BarcodeTempStorage extends Activity{
     public ArrayList<String> getBarcodeList() {
         return BarcodeList;
     }
-    public ArrayList<String> getAddedList() {
-        return AddedList;
-    }
-    public ArrayList<String> getErrorList() {
-        return ErrorList;
-    }
 
     public void AddBarcode(String barcode)
     {
@@ -72,39 +66,6 @@ public class BarcodeTempStorage extends Activity{
             final String barcode=BarcodeList.get(i);
             final int j =i;
             socket.emit("GetProductData",barcode,id);
-            socket.on("BarcodeRead", new Emitter.Listener() {
-                @Override
-                public void call(final Object... args) {
-
-                    runOnUiThread(new Runnable() {
-                        public synchronized void run() {
-                            JSONArray dataReceive =(JSONArray) args[0];
-                            try{
-                                barcodedata = dataReceive.get(0).toString();
-
-                                if (barcodedata.matches("nodata"))
-                                {
-                                    ErrorList.set(j,barcode);
-                                    Log.i("Trying Eror:",ErrorList.get(j));
-                                }
-
-                                else
-                                {
-                                    AddedList.set(j,barcodedata);
-                                    //AddedList.add(barcodedata);
-                                    Log.i("Trying Added:",AddedList.get(j));
-                                }
-                            }
-                            catch(Exception e)
-                            {
-                                System.out.print(e.getMessage());
-
-                            }
-                        }
-                    });
-                }
-            });
-
 
         }
 
