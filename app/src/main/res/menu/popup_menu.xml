@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:id="@+id/EditInfo"
+            android:title="Edit Item Info"
+            android:icon="@mipmap/arrow"
+           />
+
+        <item android:id="@+id/DelItem"
+            android:title="Delete Item"/>
+
+
+
+
+</menu>

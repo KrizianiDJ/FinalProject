@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/yesA"
+        android:title="Delete Item from Inventory and Add to Shopping List"
+        android:icon="@mipmap/arrow"
+        />
+    <item android:id="@+id/yesNoadd"
+        android:title="Delete Item from Inventory"/>
+
+
+
+    <item android:id="@+id/no"
+        android:title="Cancel"/>
+
+</menu>
