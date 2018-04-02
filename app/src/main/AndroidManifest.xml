@@ -45,7 +45,8 @@
         <activity android:name=".InventoryActivity" />
         <activity android:name=".ItemInfoActivity" />
         <activity android:name=".ShoppingList" />
-        <activity android:name=".AddItemShopping"></activity>
+        <activity android:name=".AddItemShopping" />
+        <activity android:name=".AddItemInventory"></activity>
     </application>
 
 </manifest>
