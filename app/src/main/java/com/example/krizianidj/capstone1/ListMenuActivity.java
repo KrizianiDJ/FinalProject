@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class ListMenuActivity extends AppCompatActivity {
 
-    Button camScan,systemScan,inFridge;
+    Button camScan,systemScan,inFridge,shopping;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,7 @@ public class ListMenuActivity extends AppCompatActivity {
         camScan=(Button) findViewById(R.id.phoneCam_Btn);
         systemScan=(Button) findViewById(R.id.systemCam_Btn);
         inFridge=(Button) findViewById(R.id.InFridge_Btn);
+        shopping=(Button) findViewById(R.id.toBuy_Btn);
 
         camScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +49,17 @@ public class ListMenuActivity extends AppCompatActivity {
 
             }
         });
+
+        shopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),ShoppingList.class);
+                startActivity(i);
+
+
+            }
+        });
+
 
 
     }

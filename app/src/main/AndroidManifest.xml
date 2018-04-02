@@ -43,7 +43,9 @@
         <activity android:name=".AddingBarcodes" />
         <activity android:name=".BarcodeResultActivity" />
         <activity android:name=".InventoryActivity" />
-        <activity android:name=".ItemInfoActivity"></activity>
+        <activity android:name=".ItemInfoActivity" />
+        <activity android:name=".ShoppingList" />
+        <activity android:name=".AddItemShopping"></activity>
     </application>
 
 </manifest>
