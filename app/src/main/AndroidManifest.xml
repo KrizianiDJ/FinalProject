@@ -42,7 +42,8 @@
         <activity android:name=".ListMenuActivity" />
         <activity android:name=".AddingBarcodes" />
         <activity android:name=".BarcodeResultActivity" />
-        <activity android:name=".InventoryActivity"></activity>
+        <activity android:name=".InventoryActivity" />
+        <activity android:name=".ItemInfoActivity"></activity>
     </application>
 
 </manifest>
