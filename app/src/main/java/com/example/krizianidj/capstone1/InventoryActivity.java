@@ -30,7 +30,10 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.sql.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class InventoryActivity extends AppCompatActivity {
 
@@ -41,6 +44,7 @@ public class InventoryActivity extends AppCompatActivity {
     private ArrayList<String> Inv= new ArrayList<String>();
     private ArrayList<String> Exp=new ArrayList<String>();
     private ArrayList<String> Records=new ArrayList<String>();
+
     Button Add;
     {
         try {
@@ -82,7 +86,11 @@ public class InventoryActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     public void run() {
                         JSONArray InventoryList = (JSONArray ) args[0];
+
+
                         try {
+
+
                             for (int i=0;i<InventoryList.length();i++)
                             {
                                 JSONObject rec=InventoryList.getJSONObject(i);
@@ -102,6 +110,7 @@ public class InventoryActivity extends AppCompatActivity {
 
                                 else {
                                     exp = exp.substring(0, 10);
+
                                 }
                                 Exp.add(exp);
 
@@ -120,9 +129,10 @@ public class InventoryActivity extends AppCompatActivity {
                                     TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                                     TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
-
                                     text1.setText("Rec.# "+Records.get(position)+" "+Inv.get(position));
                                     text2.setText(Exp.get(position));
+
+
                                     return view;
                                 }
                             };

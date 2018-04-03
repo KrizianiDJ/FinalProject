@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.net.URISyntaxException;
 
@@ -171,7 +172,8 @@ public class Registration extends AppCompatActivity{
                             progressBar.setVisibility(View.GONE);
                             FirebaseUser mUser=mAuth.getCurrentUser();
                             String id=mUser.getUid();
-                            Addusertodatabase(id,email,phone,firstname,lastname);
+                            String token= FirebaseInstanceId.getInstance().getToken();
+                            Addusertodatabase(id,email,phone,firstname,lastname,token);
                             Intent intent = new Intent(getApplicationContext(), Registration2.class);
                             startActivity(intent);
                             finish();
@@ -201,7 +203,7 @@ public class Registration extends AppCompatActivity{
 
     }
 
-    private void Addusertodatabase(String id,String email, String phone, String firstname, String lastname)
+    private void Addusertodatabase(String id,String email, String phone, String firstname, String lastname,String Token)
     {
 
         try{
@@ -216,7 +218,7 @@ public class Registration extends AppCompatActivity{
         catch(URISyntaxException e){}
 
         socket.connect();
-        socket.emit("AddUser",id,firstname,lastname,email,phone);
+        socket.emit("AddUser",id,firstname,lastname,email,phone,Token);
 }
 
 
