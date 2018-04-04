@@ -59,8 +59,9 @@ public class MainMenu extends AppCompatActivity {
         tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),  mUser.getUid()
-                        , Toast.LENGTH_SHORT).show();
+                Intent i=new Intent(getApplicationContext(),TemperatureActivity.class);
+                startActivity(i);
+
 
             }
         });

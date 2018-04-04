@@ -20,8 +20,8 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
-
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/refrigerator" />
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -49,19 +49,20 @@
         <activity android:name=".ItemInfoActivity" />
         <activity android:name=".ShoppingList" />
         <activity android:name=".AddItemShopping" />
-        <activity android:name=".AddItemInventory"></activity>
+        <activity android:name=".AddItemInventory" />
 
         <service android:name=".FirebaseIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".FirebaseMsgService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <service android:name=".FirebaseMsgService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+        <activity android:name=".TemperatureActivity"></activity>
     </application>
 
 </manifest>

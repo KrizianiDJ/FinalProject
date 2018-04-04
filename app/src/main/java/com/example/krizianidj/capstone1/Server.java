@@ -6,7 +6,8 @@ package com.example.krizianidj.capstone1;
 
 public class Server {
 
-    String Address="http://192.168.0.16:4000";
+   //String Address="http://10.3.70.71:4000";
+    String Address="http://192.168.0.13:4000";
 
     public Server() {
 

@@ -63,6 +63,7 @@ public class FirebaseMsgService extends FirebaseMessagingService {
                     .setContentTitle(notificationData.getTitle())
                     .setContentText(notificationData.getTextMessage())
                     .setAutoCancel(true)
+                    .setSmallIcon(R.mipmap.refrigerator)
                     .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                     .setContentIntent(pendingIntent)
                     .setWhen(System.currentTimeMillis());
