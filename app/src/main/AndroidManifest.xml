@@ -62,7 +62,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".TemperatureActivity"></activity>
+        <activity android:name=".TemperatureActivity" />
     </application>
 
 </manifest>

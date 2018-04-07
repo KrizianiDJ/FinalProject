@@ -81,6 +81,31 @@
             android:textColor="@color/colorAccent"
             android:textSize="30dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temperature Graph"
+            android:textSize="20dp"
+            android:layout_marginBottom="8dp"
+            />
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:id="@+id/graph" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Humidity Graph"
+            android:textSize="20dp"
+            android:layout_marginBottom="8dp"/>
+        <com.jjoe64.graphview.GraphView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:id="@+id/graph1"/>
+
+
+
+
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
