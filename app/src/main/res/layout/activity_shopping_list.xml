@@ -14,7 +14,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             app:srcCompat="@mipmap/grocery"
             tools:layout_editor_absoluteX="132dp"
@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginTop="2dp"
             android:text="Shopping List"
             android:textAlignment="center"
@@ -42,7 +42,9 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/Btn1"
                 android:layout_weight="1"
-                android:text="Add Item Manually"/>
+                android:drawableTop="@mipmap/sl_keyboard"
+                android:textSize="10dp"
+                android:text=""/>
 
             <Button
                 android:id="@+id/addScanBtn"
@@ -52,19 +54,39 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/Btn1"
                 android:layout_weight="1"
-                android:text="Add Item Via Scanner"/>
+                android:drawableTop="@mipmap/sl_barcode"
+                android:textSize="10dp"
+                android:text=""/>
+
+            <Button
+                android:id="@+id/checkoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/Btn1"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/sl_checked"
+                android:textSize="10dp"
+                android:text=""/>
+
+            <Button
+                android:id="@+id/Removecheckedoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/Btn1"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/sl_rmv_checked"
+                android:textSize="10dp"
+                android:text=""/>
+
+
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/checkoff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/Btn1"
-            android:text="Check Off Items"/>
+
 
 
 

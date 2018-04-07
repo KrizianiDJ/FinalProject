@@ -86,4 +86,11 @@ public class AddItemInventory extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), ListMenuActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
 }

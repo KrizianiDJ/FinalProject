@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class ShoppingListScan extends AppCompatActivity {
+public class SLAddScan extends AppCompatActivity {
 
     SurfaceView cameraPreview;
     private static final int MY_PERMISSION_REQUEST_CAMERA = 2569;
@@ -57,11 +57,11 @@ public class ShoppingListScan extends AppCompatActivity {
         } catch (URISyntaxException e){}
 
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_list_scan);
+        setContentView(R.layout.activity_sladd_scan);
+
         BarcodeList=new BarcodeTempStorage();
 
         socket.connect();
@@ -105,7 +105,7 @@ public class ShoppingListScan extends AppCompatActivity {
                 mAuth= FirebaseAuth.getInstance();
                 FirebaseUser mUser = mAuth.getCurrentUser();
                 String id = mUser.getUid();
-                BarcodeList.ComparetoShoppingList(socket,id);
+                BarcodeList.AddtoSL(socket,id);
 
                 for(int i=0;i<AddedList.size();i++) {
                     Log.i("AddedList:",""+AddedList.get(i));
@@ -139,7 +139,7 @@ public class ShoppingListScan extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
 
-                if (ActivityCompat.checkSelfPermission(ShoppingListScan.this,android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(SLAddScan.this,android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
                     // here to request the missing permissions, and then overriding
@@ -147,7 +147,7 @@ public class ShoppingListScan extends AppCompatActivity {
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    ActivityCompat.requestPermissions(ShoppingListScan.this, new String[]{android.Manifest.permission.CAMERA},
+                    ActivityCompat.requestPermissions(SLAddScan.this, new String[]{android.Manifest.permission.CAMERA},
                             MY_PERMISSION_REQUEST_CAMERA);
                     return;
                 }
@@ -211,5 +211,11 @@ public class ShoppingListScan extends AppCompatActivity {
 
 
     }
-}
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), ShoppingList.class);
+        startActivity(intent);
+        this.finish();
+    }
+}

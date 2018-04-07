@@ -89,4 +89,11 @@ public class AddItemShopping extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), ShoppingList.class);
+        startActivity(intent);
+        this.finish();
+    }
 }

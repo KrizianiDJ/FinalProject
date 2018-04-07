@@ -71,7 +71,6 @@ public class BarcodeTempStorage extends Activity{
         for(int i=0; i<BarcodeList.size(); i++)
         {
             final String barcode=BarcodeList.get(i);
-            final int j =i;
             socket.emit("GetProductData",barcode,id);
 
         }
@@ -83,8 +82,18 @@ public class BarcodeTempStorage extends Activity{
         for(int i=0; i<BarcodeList.size(); i++)
         {
             final String barcode=BarcodeList.get(i);
-            final int j =i;
             socket.emit("MarkMatches",barcode,id);
+
+        }
+
+    }
+
+    public void AddtoSL(final Socket socket,String id){
+
+        for(int i=0; i<BarcodeList.size(); i++)
+        {
+            final String barcode=BarcodeList.get(i);
+            socket.emit("AddtoSL",barcode,id);
 
         }
 

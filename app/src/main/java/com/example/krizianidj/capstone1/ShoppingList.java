@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class ShoppingList extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    Button Add,AddS;
+    Button Add,AddS,Check,RmvC;
     ListView ShopList;
     private Server server;
     private Socket socket;
@@ -57,6 +57,8 @@ public class ShoppingList extends AppCompatActivity {
         final String id = mUser.getUid();
         Add=(Button) findViewById(R.id.addMBtn);
         AddS=(Button) findViewById(R.id.addScanBtn);
+        Check=(Button) findViewById(R.id.checkoff);
+        RmvC=(Button) findViewById(R.id.Removecheckedoff);
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,12 +73,34 @@ public class ShoppingList extends AppCompatActivity {
         AddS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(getApplicationContext(),ShoppingListScan.class);
+                Intent i=new Intent(getApplicationContext(),SLAddScan.class);
                 startActivity(i);
                 finish();
 
             }
         });
+
+        Check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),SLScanMatchingItems.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
+
+        RmvC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                socket.emit("RemovedCheckedItems",id);
+                Intent i=new Intent(getApplicationContext(),ShoppingList.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
+
 
         socket.emit("GetShopList",id);
         socket.on("ShopList", new Emitter.Listener() {
@@ -127,7 +151,7 @@ public class ShoppingList extends AppCompatActivity {
                                     text1.setText("Rec.# " + Records.get(position) + " " + Items.get(position));
 
 
-                                    Log.e("..",Items.get(position) +"  "+Matches.get(position));
+                                    //Log.e("..",Items.get(position) +"  "+Matches.get(position));
 
                                     return view;
                                 }
