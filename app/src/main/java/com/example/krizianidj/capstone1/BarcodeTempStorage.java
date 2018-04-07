@@ -2,7 +2,13 @@ package com.example.krizianidj.capstone1;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -10,6 +16,7 @@ import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -59,7 +66,7 @@ public class BarcodeTempStorage extends Activity{
         return result;
     }
 
-    public void sendToDB(Socket socket,String id){
+    public void sendToDB(final Socket socket,String id){
 
         for(int i=0; i<BarcodeList.size(); i++)
         {
@@ -70,6 +77,19 @@ public class BarcodeTempStorage extends Activity{
         }
 
     }
+
+    public void ComparetoShoppingList(final Socket socket, final String id){
+
+        for(int i=0; i<BarcodeList.size(); i++)
+        {
+            final String barcode=BarcodeList.get(i);
+            final int j =i;
+            socket.emit("MarkMatches",barcode,id);
+
+        }
+
+    }
+
 
 
 }

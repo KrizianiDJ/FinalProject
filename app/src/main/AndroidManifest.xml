@@ -63,6 +63,7 @@
         </service>
 
         <activity android:name=".TemperatureActivity" />
+        <activity android:name=".ShoppingListScan"></activity>
     </application>
 
 </manifest>

@@ -28,12 +28,13 @@ import java.util.ArrayList;
 
 public class ShoppingList extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    Button Add;
+    Button Add,AddS;
     ListView ShopList;
     private Server server;
     private Socket socket;
     private ArrayList<String> Items=new ArrayList<>();
     private ArrayList<String> Records=new ArrayList<>();
+    private ArrayList<String> Matches=new ArrayList<>();
     {
         try {
             //server url
@@ -54,12 +55,23 @@ public class ShoppingList extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         final String id = mUser.getUid();
-        Add=(Button) findViewById(R.id.addBtn);
+        Add=(Button) findViewById(R.id.addMBtn);
+        AddS=(Button) findViewById(R.id.addScanBtn);
 
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(getApplicationContext(),AddItemShopping.class);
+                startActivity(i);
+                finish();
+
+            }
+        });
+
+        AddS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),ShoppingListScan.class);
                 startActivity(i);
                 finish();
 
@@ -80,18 +92,51 @@ public class ShoppingList extends AppCompatActivity {
                                 JSONObject rec=InventoryList.getJSONObject(i);
                                 String name = rec.getString("item_name");
                                 String record=rec.getString("itemrecord_id").toString();
+                                String barcode=rec.getString("barcode").toString();
+                                String matched=rec.getString("match_tosp").toString();
                                 Records.add(record);
                                 Items.add(name);
+
+                                if(matched=="null")
+                                {
+                                    matched="  ";
+                                }
+                                else{
+                                    matched=" Matched via scan";
+                                }
+
+                                Matches.add(matched);
+
+
 
 
 
                                 Log.e("trying added list....", name);
                             }
 
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
+                                    android.R.layout.simple_list_item_2, android.R.id.text1, Items) {
+                                @Override
+                                public View getView(int position, View convertView, ViewGroup parent) {
+                                    View view = super.getView(position, convertView, parent);
+                                    TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                                    TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+
+                                    text2.setText(Matches.get(position));
+                                    text1.setText("Rec.# " + Records.get(position) + " " + Items.get(position));
+
+
+                                    Log.e("..",Items.get(position) +"  "+Matches.get(position));
+
+                                    return view;
+                                }
+                            };
+
                             ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(
                                     getApplicationContext(), android.R.layout.simple_list_item_1,
                                     Items);
-                            ShopList.setAdapter(arrayAdapter1);
+                            ShopList.setAdapter(adapter);
 
                             ShopList.setOnItemClickListener(
 
