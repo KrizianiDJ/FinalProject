@@ -43,7 +43,7 @@
         <ImageView
             android:id="@+id/camera_preview"
             android:layout_width="420dp"
-            android:layout_height="400dp"
+            android:layout_height="430dp"
             android:scaleType="fitXY"
             />
 

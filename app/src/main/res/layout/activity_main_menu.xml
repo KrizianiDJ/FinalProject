@@ -21,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="14dp"
-            app:srcCompat="@mipmap/applogo"
+            app:srcCompat="@mipmap/logo"
             tools:layout_editor_absoluteX="104dp"
             tools:layout_editor_absoluteY="0dp"
             />

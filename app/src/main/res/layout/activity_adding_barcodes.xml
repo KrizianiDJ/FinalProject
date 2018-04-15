@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="match_parent"
@@ -33,6 +34,15 @@
             android:layout_height="wrap_content"
             android:text="Help FridgeBuddy's Barcode Database grow!"
             android:textAlignment="center"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="Scan Barcode"
+            android:id="@+id/scanbtn"/>
+
         <EditText
             android:id="@+id/editTextBarcode"
             android:layout_margin="8dp"

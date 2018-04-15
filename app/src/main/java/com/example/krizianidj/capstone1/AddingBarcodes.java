@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,6 +23,7 @@ public class AddingBarcodes extends AppCompatActivity {
     private EditText barcodeText,nameText, descriptionText,categoriesText,brandText;
     Button AddDevice;
     ProgressBar progressBar;
+    Button scan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,7 @@ public class AddingBarcodes extends AppCompatActivity {
         brandText=(EditText) findViewById(R.id.editTextBrand);
         AddDevice=(Button) findViewById(R.id.buttonAdd);
         progressBar=(ProgressBar) findViewById(R.id.progressbarProd);
+        scan=(Button) findViewById(R.id.scanbtn);
 
         try {
             //server url
@@ -42,6 +46,18 @@ public class AddingBarcodes extends AppCompatActivity {
         }
 
         socket.connect();
+
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent= new Intent (getApplicationContext(), ScanB.class);
+                  startActivityForResult(intent,0);
+
+            }
+        });
+
+
 
 
         AddDevice.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +71,25 @@ public class AddingBarcodes extends AppCompatActivity {
 
 
     }
+
+    @Override
+   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+               if (requestCode == 0) {
+                        if(resultCode== CommonStatusCodes.SUCCESS)
+                            {
+                                        if(data!=null){
+                                   Barcode barcode=data.getParcelableExtra("barcode");
+                                   barcodeText.setText(barcode.displayValue);
+                               }
+                            else{
+                                   barcodeText.setText("No Barcode Found");
+                               }
+                        }
+
+                            } else {
+                       super.onActivityResult(requestCode, resultCode, data);
+                    }
+           }
 
     private void AddProduct() {
 

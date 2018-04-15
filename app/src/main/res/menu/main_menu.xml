@@ -2,14 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+        <item android:id="@+id/btnAddProduct"
+            android:title="Add Product"
+            app:showAsAction="always"
+            android:icon="@mipmap/database"
+            />
+
         <item android:id="@+id/btnsignOut"
             android:title="Log Out"
             android:icon="@mipmap/sign"
             app:showAsAction="always"/>
-
-        <item android:id="@+id/btnAddProduct"
-            android:title="Add Product"
-            app:showAsAction="never"/>
 
 
 

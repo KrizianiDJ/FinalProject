@@ -64,7 +64,8 @@
 
         <activity android:name=".TemperatureActivity" />
         <activity android:name=".SLScanMatchingItems" />
-        <activity android:name=".SLAddScan"></activity>
+        <activity android:name=".SLAddScan" />
+        <activity android:name=".ScanB"></activity>
     </application>
 
 </manifest>

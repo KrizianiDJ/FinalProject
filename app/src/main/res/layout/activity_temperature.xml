@@ -6,11 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".TemperatureActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/title1"
@@ -21,7 +28,7 @@
             android:text="Most Recent Data"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,23 +38,24 @@
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 app:srcCompat="@mipmap/temp_icon" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 app:srcCompat="@mipmap/humidity" />
+
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -55,57 +63,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="Temp Value"
                 android:textAlignment="center"
-                android:textSize="18dp"
-                android:text="temp Value" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/Humidity_TV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:text="Humidity Value"
                 android:textAlignment="center"
-                android:textSize="18dp"
-                android:text="Humidity Value" />
+                android:textSize="18dp" />
         </LinearLayout>
 
 
-        <TextView
+       <TextView
             android:id="@+id/title2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:text="Historic Data"
             android:textAlignment="center"
             android:textColor="@color/colorAccent"
-            android:textSize="30dp"/>
+            android:textSize="30dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
             android:text="Temperature Graph"
-            android:textSize="20dp"
-            android:layout_marginBottom="8dp"
-            />
+            android:textSize="20dp" />
+
         <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:id="@+id/graph" />
+            android:layout_height="110dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Humidity Graph"
-            android:textSize="20dp"
-            android:layout_marginBottom="8dp"/>
+            android:textSize="20dp" />
+
         <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph1"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:id="@+id/graph1"/>
-
-
-
+            android:layout_height="110dp" />
 
 
     </LinearLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

@@ -200,7 +200,8 @@ public class ScanBarcodeActivity extends AppCompatActivity {
                    BarcodeList.AddBarcode(bar);
                     //textView.setText(thisCode.rawValue);
                     //socket.emit("BarcodeDetected", thisCode.rawValue);
-                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_ALARM, 200);
+                    ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
+                    toneGen1.getAudioSessionId();
                     toneGen1.startTone(ToneGenerator.TONE_DTMF_8, 100);
                     //intent intent= new Intent();
                     // intent.putExtra("barcode",barcodes.valueAt(0));

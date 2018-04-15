@@ -101,6 +101,8 @@ public class ItemInfoActivity extends AppCompatActivity {
                                     exp = exp.substring(0, 10);
                                 }
 
+                                timein=timein.substring(0,10);
+
                                 Name_TV.setText(name);
                                 ExpDate_ET.setHint(exp);
                                 Time_TV.setText(timein);
